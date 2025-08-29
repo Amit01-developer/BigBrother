@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Login — BIGBROTHER </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+      :root{--bg:#f5f7fb;--card:#ffffff}
+      body{background:linear-gradient(180deg,var(--bg),#eef2f7);min-height:100vh;display:flex;align-items:center;justify-content:center;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial}
+      .login-card{max-width:420px;width:100%;border-radius:16px;box-shadow:0 10px 30px rgba(20,30,60,0.08);padding:28px;background:var(--card)}
+      .brand{font-weight:700;letter-spacing:0.3px}
+      .small-muted{color:#6c757d;font-size:0.9rem}
+    </style>
+  </head>
+  <body>
+    <main class="container py-5">
+      <div class="d-flex justify-content-center">
+        <div class="login-card">
+          <div class="mb-3 text-center">
+            <h3 class="brand">MyCollege Helper</h3>
+            <p class="small-muted">Enter your email — we will send an OTP to login</p>
+          </div>
+
+          {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            <div>
+              {% for cat, msg in messages %}
+                <div class="alert alert-{{ 'secondary' if cat=='info' else cat }} alert-sm" role="alert">{{ msg }}</div>
+              {% endfor %}
+            </div>
+            {% endif %}
+          {% endwith %}
+
+          <form method="post" novalidate>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email address</label>
+              <input autofocus type="email" class="form-control" id="email" name="email" value="{{ email }}" placeholder="you@example.com" required>
+            </div>
+
+            <div class="d-grid gap-2">
+              <button type="submit" class="btn btn-primary btn-lg">Send OTP</button>
+            </div>
+
+            <div class="text-center mt-3 small-muted">No account? We'll create one for demo.</div>
+          </form>
+        </div>
+      </div>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
